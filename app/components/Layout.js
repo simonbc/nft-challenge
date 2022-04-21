@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
   return (
     <div className="max-w-5xl mx-auto p-16 flex justify-center items-center flex-col">
       <Head>
-        <title>DoinGud</title>
+        <title>NFT Challenge</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
