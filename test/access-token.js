@@ -14,6 +14,8 @@ describe("Access token", function () {
   });
 
   it("Fetch all tokens", async function () {
+    expect((await accessToken.getTokens()).length).to.equal(0);
+
     await accessToken.mint("foo", 10, 1, "123");
     expect((await accessToken.getTokens()).length).to.equal(1);
 
@@ -22,6 +24,8 @@ describe("Access token", function () {
   });
 
   it("Fetch user tokens", async function () {
+    expect((await accessToken.getPurchasedTokens()).length).to.equal(0);
+
     await accessToken.mint("foo", 10, 1, "123");
     await accessToken.purchase(1, { value: 1 });
 
