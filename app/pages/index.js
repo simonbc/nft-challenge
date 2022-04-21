@@ -9,7 +9,7 @@ import {
   useConnect,
   useDisconnect,
 } from "../context/Web3";
-import { ipfsAdd, getContract, parseEther, getTokenUri } from "../utils";
+import { ipfsAdd, getContract, parseEther } from "../utils";
 
 import Layout from "../components/Layout";
 
@@ -40,7 +40,7 @@ const HomeContent = () => {
       const slug = token[3];
       const ipfsHash = token[4];
 
-      const uri = getTokenUri(ipfsHash);
+      const uri = await contract.uri(tokenId);
       const metadata = await axios.get(uri);
       const { name, description } = metadata.data;
 

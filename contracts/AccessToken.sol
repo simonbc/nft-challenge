@@ -10,6 +10,7 @@ contract AccessToken is ERC1155, ERC1155Holder, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenId;
+    string public baseUri;
 
     struct Token {
         uint256 tokenId;
@@ -24,7 +25,9 @@ contract AccessToken is ERC1155, ERC1155Holder, Ownable {
     mapping(string => uint256) private _slugToId;
     mapping(uint256 => Token) private _idToToken;
 
-    constructor(string memory baseUri) ERC1155(baseUri) {}
+    constructor(string memory _baseUri) ERC1155(_baseUri) {
+        baseUri = _baseUri;
+    }
 
     function mint(
         string memory slug,
@@ -75,5 +78,10 @@ contract AccessToken is ERC1155, ERC1155Holder, Ownable {
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
+    }
+
+    function uri(uint256 tokenId) public view override returns (string memory) {
+        Token memory token = _idToToken[tokenId];
+        return string(abi.encodePacked(baseUri, token.ipfsHash));
     }
 }

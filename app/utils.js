@@ -3,7 +3,6 @@ import { create as ipfsHttpClient } from "ipfs-http-client";
 
 import Artifact from "./artifacts/contracts/AccessToken.sol/AccessToken.json";
 
-const IPFS_BASE_URI = "https://ipfs.infura.io/ipfs/";
 const ipfsClient = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 export const getContract = async (signer) => {
@@ -12,10 +11,6 @@ export const getContract = async (signer) => {
     Artifact.abi,
     signer
   );
-};
-
-export const getTokenUri = (ipfsHash) => {
-  return `${IPFS_BASE_URI}${ipfsHash}`;
 };
 
 export const ipfsAdd = async (name, description) => {
