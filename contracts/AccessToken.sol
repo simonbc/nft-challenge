@@ -71,6 +71,27 @@ contract AccessToken is ERC1155, ERC1155Holder, Ownable {
         return _tokens;
     }
 
+    function getPurchasedTokens() external view returns (Token[] memory) {
+        uint256 totalTokenCount = _tokenId.current();
+        uint256 userTokenCount = 0;
+
+        for (uint256 i = 1; i <= totalTokenCount; i++) {
+            if (balanceOf(msg.sender, i) > 0) {
+                userTokenCount++;
+            }
+        }
+
+        uint256 currentIndex = 0;
+        Token[] memory tokens = new Token[](userTokenCount);
+        for (uint256 i = 1; i <= totalTokenCount; i++) {
+            if (balanceOf(msg.sender, i) > 0) {
+                tokens[currentIndex] = _idToToken[i];
+                currentIndex++;
+            }
+        }
+        return tokens;
+    }
+
     function supportsInterface(bytes4 interfaceId)
         public
         view

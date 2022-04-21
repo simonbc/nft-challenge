@@ -11,11 +11,11 @@ const CommunityContent = () => {
 const Community = () => {
   return (
     <Web3Provider>
-      <Access slug="community">
-        <Layout>
+      <Layout>
+        <Access slug="community">
           <CommunityContent />
-        </Layout>
-      </Access>
+        </Access>
+      </Layout>
     </Web3Provider>
   );
 };

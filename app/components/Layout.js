@@ -47,8 +47,13 @@ const Layout = ({ children }) => {
             </Link>
           </h1>
           <div className="mr-4 flex justify-center font-semibold">
+            <Tab to={"/mint"} disabled={!address}>
+              Mint Tokens
+            </Tab>
+          </div>
+          <div className="mr-4 flex justify-center font-semibold">
             <Tab to={"/community"} disabled={!address}>
-              Private community
+              Private Community
             </Tab>
           </div>
           <div className="text-center">

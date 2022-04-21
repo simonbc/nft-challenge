@@ -14,8 +14,6 @@ const Access = ({ slug, children }) => {
     const contract = await getContract(signer);
     const hasAccess = await contract.authenticate(address, slug);
 
-    console.log("hasAccess", hasAccess, address, slug);
-
     if (hasAccess) {
       setAuthenticated(true);
     } else {
