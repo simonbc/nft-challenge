@@ -22,7 +22,9 @@ async function main() {
 
   console.log("AccessToken deployed to:", contract.address, network.name);
 
-  updateEnvVar("NEXT_PUBLIC_CONTRACT_ADDRESS", contract.address);
+  if (network.name === "localhost") {
+    updateEnvVar("NEXT_PUBLIC_CONTRACT_ADDRESS", contract.address);
+  }
 }
 
 main()
