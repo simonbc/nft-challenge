@@ -4,8 +4,9 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract AccessToken is ERC1155, ERC1155Holder {
+contract AccessToken is ERC1155, ERC1155Holder, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenId;
@@ -23,14 +24,14 @@ contract AccessToken is ERC1155, ERC1155Holder {
     mapping(string => uint256) private _slugToId;
     mapping(uint256 => Token) private _idToToken;
 
-    constructor(string memory uri) ERC1155(uri) {}
+    constructor(string memory baseUri) ERC1155(baseUri) {}
 
     function mint(
         string memory slug,
         uint256 amount,
         uint256 price,
         string memory ipfsHash
-    ) external {
+    ) external onlyOwner {
         require(_slugToId[slug] == 0, "Slug already taken");
 
         _tokenId.increment();
